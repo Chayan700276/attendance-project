@@ -15,13 +15,13 @@ include_once ($filepath.'/../config/config.php');
 		public $error;
 
 		
-		function __construct(argument)
+		function __construct()
 		{
 			$this->ConnectDB();
 		}
 
 		public function ConnectDB(){
-			$this->link = new mysqli($this-host,$this->user,$this->pass,$this->dbname);
+			$this->link = new mysqli($this->host,$this->user,$this->pass,$this->dbname);
 			if (!$this->link) {
 				$this->error = "Connection failed".$this->link->Connect_error;
 				return false;

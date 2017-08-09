@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Attence management system</title>
-	<link rel="stylesheet" type="text/css" href="inc/bootstrap.min.css">
-	<script type="text/javascript" src="inc/bootstrap.min.js"></script>
-	<script type="text/javascript" src="inc/jquery.min.js"></script>
-</head>
-<body>
-	<div class="container">
-		<div class="well text-center">
-			<h2>Attendace management system</h2>
-		</div>
+ <?php include 'inc/header.php'; ?>
+ <?php include 'lib/student.php'; ?>
 
+ <?php 
+ 	$stu = new student();
+ 	$c_date = date('Y-m-d');
+
+ 	$get_stu = $stu->getAllStudent();
+  ?>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h2>
@@ -21,7 +16,7 @@
 			</div>
 
 			<div class="well text-center">
-				<strong style="font-size: 40px;"><?php echo $c_date = date('Y-m-d') ?></strong>
+				<strong style="font-size: 40px;"><?php echo $c_date ?></strong>
 			</div>
 
 			<div class="panel-body">
@@ -33,15 +28,26 @@
 							<th width="25%">Student Roll</th>
 							<th width="25%">Attendance</th>
 						</tr>
+
+						<?php 
+
+						 	if ($get_stu) {
+					 		 $i = 0;
+					 		 while ($value = $get_stu->fetch_assoc()) {
+					 		 	$i++;
+
+						 ?>
 						<tr>
-							<td>01</td>
-							<td>Chayan roy</td>
-							<td>700276</td>
+							<td><?php echo $value['id'] ?></td>
+							<td><?php echo $value['name'] ?></td>
+							<td><?php echo $value['roll'] ?></td>
 							<td>
-								<input type="radio" name="attend" value="present">P
-								<input type="radio" name="attend" value="absent">A
+								<input type="radio" name="attend[<?php echo $value['roll'] ?>]" value="present">P
+								<input type="radio" name="attend[<?php echo $value['roll'] ?>]" value="absent">A
 							</td>
 						</tr>
+						<?php  }
+ 	                            } ?>
 						<tr>
 							<td>
 							  <input type="submit" class="btn btn-success" name="submit" value="submit">
@@ -54,12 +60,4 @@
 			
 		</div>
 
-       <div class="row">
-			<div class="well">
-				Practice :chayan roy cmt..
-				<span class="pull-right">just learning</span>
-			</div>
-	   </div>
-	</div>
-</body>
-</html>
+  <?php include 'inc/footer.php'; ?>
