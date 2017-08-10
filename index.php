@@ -7,11 +7,24 @@
 
  	$get_stu = $stu->getAllStudent();
   ?>
+
+  <?php 
+  	 if ($_SERVER["REQUEST_METHOD"]=='POST') {
+  	 	$attend =$_POST['attend'];
+  	 	$insert_attend = $stu->attendInsert($c_date,$attend);
+  	 }
+   ?>
+
+   <?php 
+   		if (isset($insert_attend)) {
+   			echo $insert_attend;
+   		}
+    ?>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h2>
 					<a class="btn btn-success" href="add.php">Add student</a>
-					<a class="btn btn-info pull-right" href="add.php">View all</a>
+					<a class="btn btn-info pull-right" href="view.php">View all</a>
 				</h2>
 			</div>
 
