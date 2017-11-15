@@ -2,6 +2,8 @@
  <?php include 'lib/student.php'; ?>
 
  <?php 
+
+   error_reporting(0); // empty data dile je undifine index attend dekhay ta dur korar jonno...eta deoa hoise....
  	$stu = new student();
  	$c_date = date('Y-m-d');
 
@@ -11,7 +13,11 @@
   <?php 
   	 if ($_SERVER["REQUEST_METHOD"]=='POST') {
   	 	$attend =$_POST['attend'];
+  	 	if (empty($attend)) {
+  	 		echo  "<div class='alert alert-danger'><storng>Error! Field must not be empty</storng></div>";
+  	 	} else{
   	 	$insert_attend = $stu->attendInsert($c_date,$attend);
+  	  }
   	 }
    ?>
 
@@ -24,7 +30,7 @@
 			<div class="panel-heading">
 				<h2>
 					<a class="btn btn-success" href="add.php">Add student</a>
-					<a class="btn btn-info pull-right" href="view.php">View all</a>
+					<a class="btn btn-info pull-right" href="view_all.php">View all</a>
 				</h2>
 			</div>
 
